@@ -19,3 +19,4 @@ if __name__ == '__main__':
 	loof = []
 	while True:
 		loof.append(Client(ipthing, 80))
+		print("Client Added")
