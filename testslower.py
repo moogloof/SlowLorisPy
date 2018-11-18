@@ -12,7 +12,10 @@ class Client:
 
 	def handler(self):
 		while True:
-			self.sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+			try:
+				self.sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+			except:
+				pass
 
 if __name__ == '__main__':
 	ipthing = input("IP PLES: ")
