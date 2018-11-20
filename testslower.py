@@ -15,9 +15,12 @@ class Client:
 			try:
 				self.sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
 			except:
+				loof.append(Client(ipthing, 80))
 				pass
 
 if __name__ == '__main__':
+	global ipthing
+	global loof
 	ipthing = input("IP PLES: ")
 	loof = []
 	while True:
