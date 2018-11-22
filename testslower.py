@@ -2,6 +2,7 @@ import socket
 import random
 import threading
 import time
+import sys
 
 class SlowL:
 	def __init__(self, ip, port):
@@ -29,5 +30,5 @@ class SlowL:
 		self.open -= 1
 
 if __name__ == '__main__':
-	ips = input("IP NOW: ")
+	ips = sys.argv[1]
 	s = SlowL(ips, 80)
