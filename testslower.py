@@ -5,7 +5,7 @@ import time
 
 class SlowL:
 	def __init__(self, ip, port):
-		self.ip = ip
+		self.ip = socket.gethostbyname(ip)
 		self.port = port
 		self.open = 0
 		while True:
