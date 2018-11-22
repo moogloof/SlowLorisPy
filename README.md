@@ -1,6 +1,8 @@
 # SlowLorisPy
 <p>A simple little slorloris attack implemented using python</p>
 
+<blockquote>The python2 version is less effective and powerful than the python3 version</blockquote>
+
 ### Usage
 ```
 cd path/to/folder/containing/file
