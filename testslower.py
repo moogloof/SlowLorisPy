@@ -23,6 +23,7 @@ class SlowL:
 			sock.connect((self.ip, self.port))
 		except:
 			self.open -= 1
+			sock.close()
 			return
 		while True:
 			try:
@@ -34,5 +35,5 @@ class SlowL:
 				break
 
 if __name__ == '__main__':
-	ips = sys.argv[1]
+	ips = raw_input("IP NOW: ")
 	s = SlowL(ips, 80)
