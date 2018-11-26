@@ -1,7 +1,7 @@
 # SlowLorisPy
 <p>A simple little slorloris attack implemented using python</p>
 
-<blockquote>The python2 version is less effective and powerful than the python3 version</blockquote>
+<blockquote>The python3 version is less effective and powerful than the python2 version</blockquote>
 
 ### Usage
 ```
