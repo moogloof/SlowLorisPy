@@ -37,5 +37,5 @@ class SlowL:
 
 if __name__ == '__main__':
 	ips = raw_input("IP NOW: ")
-	mat = subprocess.check_output(["ulimit", "-n"])
+	mat = int(subprocess.check_output(["ulimit", "-n"]))
 	s = SlowL(ips, 80, mat)
