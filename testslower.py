@@ -35,6 +35,7 @@ class SlowL:
 				break
 
 if __name__ == '__main__':
+	print("Set ulimit -n to 2000")
 	ips = input("IP NOW: ")
 	mat = subprocess.check_output(["ulimit", "-n"])
 	s = SlowL(ips, 80, mat)
