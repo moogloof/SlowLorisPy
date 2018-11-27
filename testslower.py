@@ -35,7 +35,15 @@ class SlowL:
 				break
 
 if __name__ == '__main__':
-	print("Set ulimit -n to 2000")
-	ips = raw_input("IP NOW: ")
-	mat = int(subprocess.check_output(["ulimit", "-n"]))
-	s = SlowL(ips, 80, mat)
+	if sys.version_info[0] < 3:
+		print("Python version 2.x")
+		print("Set ulimit -n to 2000")
+		ips = raw_input("IP NOW: ")
+		mat = int(subprocess.check_output(["ulimit", "-n"]))
+		s = SlowL(ips, 80, mat)
+	else:
+		print("Python version 3.x")
+		print("Set ulimit -n to 2000")
+		ips = input("IP NOW: ")
+		mat = int(subprocess.check_output(["ulimit", "-n"]))
+		s = SlowL(ips, 80, mat)
