@@ -1,7 +1,6 @@
 import socket
 import random
 import threading
-import time
 import subprocess
 
 class SlowL:
